@@ -28,6 +28,7 @@ public class DaimonManager : MonoBehaviour
     public bool play = false;
 
 
+
     // Start is called before the first frame update
     void Start()
     {
