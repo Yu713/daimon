@@ -10,7 +10,7 @@ public class DaimonManager : MonoBehaviour
 
     private LangTransService dTranslationMgr;
     private DialogueService dDialogMgr;
-    private SpeechInputService mySpeechInputMgr;
+    public SpeechInputService mySpeechInputMgr;
     private SpeechOutputService mySpeechOutputMgr;
 
     private Salsa3D salsa3D;
@@ -66,7 +66,7 @@ public class DaimonManager : MonoBehaviour
         { 
 
             //check that clip is not playing		
-            Debug.Log ("-------------------- Speech has finished --------------------");
+            Debug.Log ("-------------------- Speech Output has finished playing, now reactivating SpeechInput.");
             check = false;
 
             //Now let's start listening again.....

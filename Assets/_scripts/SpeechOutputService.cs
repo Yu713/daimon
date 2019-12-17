@@ -63,7 +63,7 @@ public class SpeechOutputService : MonoBehaviour
     public void Speak(string text)
     {
 
-        Debug.Log("Sending to Watson's Text To Speech: " + text);
+        Debug.Log("Sending to Watson to generate voice audio output: " + text);
         if (text != null && text != "")
         {
             myService.Synthesize(
@@ -97,6 +97,9 @@ public class SpeechOutputService : MonoBehaviour
 
         if (Application.isPlaying && clip != null)
         {
+
+            dDaimonMgr.mySpeechInputMgr.Active = false;
+
             audioSrc.spatialBlend = 0.0f;
             audioSrc.volume = 1.0f;
             audioSrc.loop = false;
@@ -105,7 +108,7 @@ public class SpeechOutputService : MonoBehaviour
 
             dDaimonMgr.wait = clip.length; // may be useful to add +0.5f
             dDaimonMgr.check = true;
-            Debug.Log("Speech output playing, set DaimonMgr waiting time for SpeechInput to activate again (when done).");
+            Debug.Log("Speech output playing, set DaimonMgr waiting time for SpeechInput to reactivate again (when done) after " + clip.length + " seconds");
 
         } else
         {

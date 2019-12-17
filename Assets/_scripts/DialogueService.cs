@@ -26,7 +26,7 @@ public class DialogueService : MonoBehaviour
     [Space(10)]
     [Tooltip("The IAM apikey.")]
     [SerializeField]
-    private string iamApikey = "RaMMd8i7ZWna2LrYAXBJPJih9b5WJvVrBAtBLT8Ji_l7";
+    private string iamApikey = "X4udGLROceeDWMxy8aZ85p_AJLghkkwPtzYwF5IN5NVS";
     [Tooltip("The service URL (optional). This defaults to \"https://gateway.watsonplatform.net/assistant/api\"")]
     [SerializeField]
     private string serviceUrl = "https://gateway-lon.watsonplatform.net/assistant/api";
@@ -35,7 +35,7 @@ public class DialogueService : MonoBehaviour
     private string versionDate = "2019-02-28";
     [Tooltip("The assistantId to run the example.")]
     [SerializeField]
-    private string assistantId = "be692987-a7b0-4223-9bbf-030559fa005f";
+    private string assistantId = "9437d854-b239-4054-b78b-c7b446731498";
 
     public Animator anim;
 
@@ -155,7 +155,7 @@ public class DialogueService : MonoBehaviour
         }
 
         dSpeechOutputMgr.Speak(response.Result.Output.Generic[0].Text + ", " + username);
-        dSpeechInputMgr.Active = true;
+        //dSpeechInputMgr.Active = false;
 
         //myTTS.myVoice = "de-DE_DieterV3Voice";
         //myTTS.Speak(myTranslator.lastTranslationResult);
