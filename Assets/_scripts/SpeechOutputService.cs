@@ -21,8 +21,8 @@ public class SpeechOutputService : MonoBehaviour
     private TextToSpeechService myService;
 
     public string versionDate = "2018-12-19";
-    public string apiKey = "hQ37RvPZw2T6ppxja9t5Z3oH0azs49nPCtZPbJuYSrhr"; 
-    public string serviceUrl = "https://gateway-lon.watsonplatform.net/text-to-speech/api"; 
+    //public string apiKey = "";
+    //public string serviceUrl = "https://gateway-lon.watsonplatform.net/text-to-speech/api";
 
     public string myVoice = "en-US_MichaelVoice";
 
@@ -94,6 +94,7 @@ public class SpeechOutputService : MonoBehaviour
         AudioClip clip = null;
         synthesizeResponse = response.Result;
         clip = WaveFile.ParseWAV("myClip", synthesizeResponse);
+		Debug.Log("before playing: " + clip);
         PlayClip(clip);
     }
 

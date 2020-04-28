@@ -573,6 +573,7 @@ GameObject:
   - component: {fileID: 1646685153}
   - component: {fileID: 1646685154}
   - component: {fileID: 1646685155}
+  - component: {fileID: 1646685156}
   m_Layer: 0
   m_Name: WatsonServices
   m_TagString: Untagged
@@ -592,9 +593,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 48e6358eea2a02547b880b3de98342bd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  serviceUrl: https://gateway-lon.watsonplatform.net/speech-to-text/api
   ResultsField: {fileID: 1863902092}
-  iamApikey: zngKvVILMGV_58ZIMDxnCuYnyKM4PUzsLCRSlYTRoCHJ
   _recognizeModel: 
 --- !u!4 &1646685151
 Transform:
@@ -625,8 +624,6 @@ MonoBehaviour:
   ResponseTextField: {fileID: 1863902092}
   translationModel: en-zh
   versionDate: 2018-12-19
-  apiKey: htouiGDBVSOcjKYQSwgIC71hDcxKCQMJGLDCT8mWBbJ5
-  serviceUrl: https://gateway-lon.watsonplatform.net/language-translator/api
   lastTranslationResult: 
 --- !u!114 &1646685153
 MonoBehaviour:
@@ -641,8 +638,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   ResponseTextField: {fileID: 1863902092}
-  iamApikey: X4udGLROceeDWMxy8aZ85p_AJLghkkwPtzYwF5IN5NVS
-  serviceUrl: https://gateway-lon.watsonplatform.net/assistant/api/v2/assistants/9437d854-b239-4054-b78b-c7b446731498/sessions
   versionDate: 2018-12-19
   assistantId: fd4e26f9-5677-4136-910c-bd4cc6891e8d
   anim: {fileID: 0}
@@ -660,8 +655,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   ResponseTextField: {fileID: 1863902092}
   versionDate: 2018-12-19
-  apiKey: RaMMd8i7ZWna2LrYAXBJPJih9b5WJvVrBAtBLT8Ji_l7
-  serviceUrl: https://gateway-lon.watsonplatform.net/assistant/api/v2/assistants/9437d854-b239-4054-b78b-c7b446731498/sessions
   myVoice: en-US_MichaelVoice
 --- !u!82 &1646685155
 AudioSource:
@@ -759,6 +752,24 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
+--- !u!114 &1646685156
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1646685149}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7772641d89ea835409f11636c2f185d5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  mySpeechInputMgr: {fileID: 0}
+  randomEyes: {fileID: 0}
+  lookTargets: []
+  wait: 0
+  check: 0
+  play: 0
 --- !u!1 &1671010767 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 100000, guid: 3f2ebb8ad94b0504d9cecfcd68d9e484,

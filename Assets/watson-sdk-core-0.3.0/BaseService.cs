@@ -34,7 +34,7 @@ namespace IBM.Cloud.SDK
             var credentialsPaths = Utility.GetCredentialsPaths();
             if (credentialsPaths.Count > 0)
             {
-				MonoBehaviour.print("found a environment file: " + credentialsPaths[0] );
+				//MonoBehaviour.print("found a environment file: " + credentialsPaths[0] );
 				
                 foreach (string path in credentialsPaths)
                 {
@@ -45,7 +45,7 @@ namespace IBM.Cloud.SDK
                 }
 
                 string ApiKey = Environment.GetEnvironmentVariable(serviceId.ToUpper() + "_IAM_APIKEY");
-				MonoBehaviour.print("APIKEY:" + ApiKey );
+				MonoBehaviour.print("API key for "+serviceId+" = " + ApiKey );
                 // check for old IAM API key name as well
                 if (string.IsNullOrEmpty(ApiKey)) {
                     ApiKey = Environment.GetEnvironmentVariable(serviceId.ToUpper() + "_APIKEY");
