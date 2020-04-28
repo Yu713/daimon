@@ -1,4 +1,4 @@
-﻿using System.Collections;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
@@ -41,6 +41,7 @@ public class SpeechOutputService : MonoBehaviour
     {
         LogSystem.InstallDefaultReactors();
         audioSrc = GameObject.Find("02 FW").GetComponent<AudioSource>();
+		
         dDaimonMgr = GetComponent<DaimonManager>();
 
         StartCoroutine(ConnectToTTSService());
@@ -49,14 +50,20 @@ public class SpeechOutputService : MonoBehaviour
        
     private IEnumerator ConnectToTTSService()
     {
+		/*
         TokenOptions myTokenOptions = new TokenOptions()
         {
             IamApiKey = apiKey
         };
         Credentials myCredentials = new Credentials(myTokenOptions, serviceUrl);
         while (!myCredentials.HasIamTokenData()) yield return null;
+		 
 
         myService = new TextToSpeechService(myCredentials);
+		 */
+		
+		myService = new TextToSpeechService();
+		while (!myService.Credentials.HasIamTokenData()) yield return null;
        
     }
 

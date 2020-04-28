@@ -1,4 +1,4 @@
-﻿using System.Collections;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
@@ -35,7 +35,7 @@ public class DialogueService : MonoBehaviour
     private string versionDate = "2019-02-28";
     [Tooltip("The assistantId to run the example.")]
     [SerializeField]
-    private string assistantId = "9437d854-b239-4054-b78b-c7b446731498";
+	private string assistantId = "fd4e26f9-5677-4136-910c-bd4cc6891e8d"; //9437d854-b239-4054-b78b-c7b446731498";
 
     public Animator anim;
 
@@ -62,9 +62,10 @@ public class DialogueService : MonoBehaviour
 
     private IEnumerator CreateService()
     {
+		/*
         if (string.IsNullOrEmpty(iamApikey))
         {
-            throw new IBMException("Plesae provide IAM ApiKey for the service.");
+            throw new IBMException("Please provide IAM ApiKey for the service.");
         }
 
         //  Create credential and instantiate service
@@ -81,9 +82,13 @@ public class DialogueService : MonoBehaviour
         //  Wait for tokendata
         while (!credentials.HasIamTokenData())
             yield return null;
+		*/
 
-        service = new AssistantService(versionDate, credentials);
+        service = new AssistantService(versionDate); //, credentials);
 
+		while (!service.Credentials.HasIamTokenData())
+		yield return null;
+		
         Runnable.Run(CreateSession());
 
         //Runnable.Run(Examples());
@@ -91,7 +96,7 @@ public class DialogueService : MonoBehaviour
 
     private IEnumerator CreateSession()
     {
-        //Log.Debug("ExampleAssistantV2.RunTest()", "Attempting to CreateSession");
+		Debug.Log("CONNECTING TO ASSISTANT: " + assistantId);
         service.CreateSession(OnCreateSession, assistantId);
 
         while (!createSessionTested)
