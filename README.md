@@ -1,7 +1,7 @@
 # DAIMON: Dialogue-oriented Artificial Intelligence deMONstrator
 
 DAIMON is a demonstrator for holographic AIs written by Xinyu Huang and Prof Dr Fridolin Wild.
-The 3D character model is a (younger) version of Fridolin, which we reconstructed from a 3D scan following the process documented in [this paper][1], see [preprint][2].
+The 3D character model is a (younger, beardless) version of Fridolin, which we reconstructed from a 3D scan following the process documented in [this paper][1], see [preprint][2].
 It can easily be exchanged for other, rigged character models.
 
 DAIMON consists of several service wrappers, most notably the DaimonManager script, which ties all other services together.
