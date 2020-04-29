@@ -66,6 +66,13 @@ DAIMON uses SALSA, which is a for-pay Unity package. You can obtain your own cop
 [1]: https://ieeexplore.ieee.org/document/8975993i
 [2]: Documentation/2019-ic3d-huang-wild-twycross.pdf
 
+## License
+
+All original parts of this project are licensed under Apache 2.0. The IBM Watson 
+Unity SDK and the IBM Unity SDK core are also governed by an Apache 2.0 license. 
+SALSA is commercial and you will have to btain your own license. The 
+full Apache 2.0 license text is available in [LICENSE](LICENSE.md).
+
 ## References
 
 Xinyu Huang, Fridolin Wild, John Twycross (2019): A process for the semi-automated generation of life-sized, interactive 3D character models for holographic projection, In: International Conference on 3D Immersion (IC3D), December 11, 2019, Brussels, Belgium, IEEE, [link](https://ieeexplore.ieee.org/document/8975993), [preprint](Documentation/2019-ic3d-huang-wild-twycross.pdf)
