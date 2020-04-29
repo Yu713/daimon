@@ -531,7 +531,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 400000, guid: 3f2ebb8ad94b0504d9cecfcd68d9e484, type: 3}
       propertyPath: m_LocalRotation.y
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 400000, guid: 3f2ebb8ad94b0504d9cecfcd68d9e484, type: 3}
       propertyPath: m_LocalRotation.z
@@ -539,7 +539,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 400000, guid: 3f2ebb8ad94b0504d9cecfcd68d9e484, type: 3}
       propertyPath: m_LocalRotation.w
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 400000, guid: 3f2ebb8ad94b0504d9cecfcd68d9e484, type: 3}
       propertyPath: m_RootOrder
@@ -551,7 +551,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 400000, guid: 3f2ebb8ad94b0504d9cecfcd68d9e484, type: 3}
       propertyPath: m_LocalEulerAnglesHint.y
-      value: 0
+      value: 180
       objectReference: {fileID: 0}
     - target: {fileID: 400000, guid: 3f2ebb8ad94b0504d9cecfcd68d9e484, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
@@ -809,9 +809,9 @@ MonoBehaviour:
   - Eyeright.F16
   - EyeBDown.F18
   - EyeBUp.F17
-  saySmallIndex: 0
-  sayMediumIndex: 0
-  sayLargeIndex: 0
+  saySmallIndex: 1
+  sayMediumIndex: 3
+  sayLargeIndex: 4
   saySmallTrigger: 0.0005
   sayMediumTrigger: 0.003
   sayLargeTrigger: 0.0055
