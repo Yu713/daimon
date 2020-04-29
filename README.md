@@ -70,7 +70,7 @@ DAIMON uses SALSA, which is a for-pay Unity package. You can obtain your own cop
 
 All original parts of this project are licensed under Apache 2.0. The IBM Watson 
 Unity SDK and the IBM Unity SDK core are also governed by an Apache 2.0 license. 
-SALSA is commercial and you will have to btain your own license. The 
+SALSA is commercial and you will have to obtain your own license. The 
 full Apache 2.0 license text is available in [LICENSE](LICENSE.md).
 
 ## References
