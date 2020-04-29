@@ -2,7 +2,16 @@
 
 DAIMON is a demonstrator for holographic AIs written by Xinyu Huang and Prof Dr Fridolin Wild.
 
-DAIMON uses IBM Watson, so you have to register a free IBM cloud account, instantiate the services for:
+## IBM Watson installation
+
+We have left the Watson version we used in the source tree. The IBM Watson Unity SDK and the IBM Unity SDK core both come under an Apache 2.0 open source license which allows that. 
+
+Should you ever have to update to a newer version, you would download the latest IBM Watson Unity SDK release from [here](https://github.com/watson-developer-cloud/unity-sdk) and the IBM Unity SDK core from [there](https://github.com/IBM/unity-sdk-core), and follow their installation instruction (basically moving it to the Assets folder).
+
+## IBM Watson configuration
+
+DAIMON uses IBM Watson, so you have to register a free IBM cloud account and instantiate the services for:
+
 * Speech to Text
 * Text to Speech
 * Watson Assistant
@@ -14,6 +23,7 @@ with the source tree.
 
 This will look something like:
 
+```
 TONE_ANALYZER_APIKEY=xxx
 TONE_ANALYZER_IAM_APIKEY=xxx
 TONE_ANALYZER_URL=https://gateway-lon.watsonplatform.net/tone-analyzer/api
@@ -34,4 +44,6 @@ LANGUAGE_TRANSLATOR_APIKEY=mmm
 LANGUAGE_TRANSLATOR_IAM_APIKEY=mmm
 LANGUAGE_TRANSLATOR_URL=https://gateway-lon.watsonplatform.net/language-translator/api
 LANGUAGE_TRANSLATOR_AUTH_TYPE=iam
+```
+
 
