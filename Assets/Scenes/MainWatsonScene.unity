@@ -866,10 +866,10 @@ MonoBehaviour:
   - Eyeright.F16
   - EyeBDown.F18
   - EyeBUp.F17
-  lookUpIndex: 0
-  lookDownIndex: 0
-  lookLeftIndex: 0
-  lookRightIndex: 0
+  lookUpIndex: 9
+  lookDownIndex: 10
+  lookLeftIndex: 11
+  lookRightIndex: 12
   blinkIndex: 0
   lookRandPosition: {x: 0, y: 0, z: 0}
   lookAmount:
@@ -888,7 +888,7 @@ MonoBehaviour:
   closeMax: 100
   eyePosition: {fileID: 1453262974}
   eyePosVerify: {fileID: 1453262974}
-  lookTarget: {fileID: 0}
+  lookTarget: {fileID: 1391086061}
   lookTargetTracking: {fileID: 0}
   targetAffinity: 0
   targetAffinityPercentage: 0.5
@@ -903,13 +903,104 @@ MonoBehaviour:
   expandBroadcastCS: 0
   broadcastCSReceivers: []
   propagateToChildrenCS: 0
-  selectedCustomShape: 0
-  noneShapeIndex: 0
+  selectedCustomShape: 10
+  noneShapeIndex: 10
   excludeEyeShapes: 1
-  dynamicCustomShapes: []
-  customShapeCount: 0
+  dynamicCustomShapes:
+  - Eyes.F3
+  - Samll.F4
+  - L.F6
+  - Medium.F7
+  - Large.F5
+  - O.F8
+  - Happy.F10
+  - Sad.F11
+  - F.F12
+  - EyeBUp.F17
+  - None
+  customShapeCount: 10
   expandCustomShapes: 0
-  customShapes: []
+  customShapes:
+  - shapeIndex: 0
+    shapeName: Eyes.F3
+    shapeValue: 0
+    overrideOn: 0
+    notRandom: 0
+    isOn: 0
+    blendSpeed: 5
+    rangeOfMotion: 100
+  - shapeIndex: 1
+    shapeName: Samll.F4
+    shapeValue: 0
+    overrideOn: 0
+    notRandom: 0
+    isOn: 0
+    blendSpeed: 5
+    rangeOfMotion: 100
+  - shapeIndex: 2
+    shapeName: L.F6
+    shapeValue: 0
+    overrideOn: 0
+    notRandom: 0
+    isOn: 0
+    blendSpeed: 5
+    rangeOfMotion: 100
+  - shapeIndex: 3
+    shapeName: Medium.F7
+    shapeValue: 0
+    overrideOn: 0
+    notRandom: 0
+    isOn: 0
+    blendSpeed: 5
+    rangeOfMotion: 100
+  - shapeIndex: 4
+    shapeName: Large.F5
+    shapeValue: 0
+    overrideOn: 0
+    notRandom: 0
+    isOn: 0
+    blendSpeed: 5
+    rangeOfMotion: 100
+  - shapeIndex: 5
+    shapeName: O.F8
+    shapeValue: 0
+    overrideOn: 0
+    notRandom: 0
+    isOn: 0
+    blendSpeed: 5
+    rangeOfMotion: 100
+  - shapeIndex: 6
+    shapeName: Happy.F10
+    shapeValue: 0
+    overrideOn: 0
+    notRandom: 0
+    isOn: 0
+    blendSpeed: 5
+    rangeOfMotion: 100
+  - shapeIndex: 7
+    shapeName: Sad.F11
+    shapeValue: 0
+    overrideOn: 0
+    notRandom: 0
+    isOn: 0
+    blendSpeed: 5
+    rangeOfMotion: 100
+  - shapeIndex: 8
+    shapeName: F.F12
+    shapeValue: 0
+    overrideOn: 0
+    notRandom: 0
+    isOn: 0
+    blendSpeed: 5
+    rangeOfMotion: 100
+  - shapeIndex: 14
+    shapeName: EyeBUp.F17
+    shapeValue: 0
+    overrideOn: 0
+    notRandom: 0
+    isOn: 0
+    blendSpeed: 5
+    rangeOfMotion: 100
   randomCustomShapes: 1
   maxCustomShapeInterval: 3
   randomCSBlendSpeedMin: 0.75
