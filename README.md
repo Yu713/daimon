@@ -5,7 +5,7 @@ The 3D character model is a (younger, beardless) version of Fridolin, which we r
 It can easily be exchanged for other, rigged character models.
 
 DAIMON consists of several service wrappers, most notably the DaimonManager script, which ties all other services together.
-The services it utilises are following a pipeline, listening to speech input (SpeechInputService), possibly using a translation service (LangTransService), to then communicate with an assistant using the transcribed, recognised, possibly translated text (DialogueService). Responses received from the assistant are then converted via the SpeechOutputService to an audio clip which is played to the user, pausing the speech input service to avoid loops of the assistant listening to himself.
+The services it utilises are following a pipeline, listening to speech input (SpeechInputService), possibly using a translation service (LangTransService), to then communicate with an assistant using the transcribed, recognised, possibly translated text (DialogueService). Responses received from the assistant are then converted via the SpeechOutputService to an audio clip which is played to the user, pausing the speech input service to avoid loops of the assistant listening to himself. All services are attached to an empty game object WatsonServices in the Scene/MainWatsonScene. The scripts of the services are all located in the project browser under _scripts.
 
 ## IBM Watson installation
 
