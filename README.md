@@ -1,7 +1,7 @@
 # DAIMON: Dialogue-oriented Artificial Intelligence deMONstrator
 
 DAIMON is a demonstrator for holographic AIs written by Xinyu Huang and Prof Dr Fridolin Wild.
-The 3D character model is a (younger) version of Fridolin, which we reconstructed from a 3D scan following the process documented in [this paper][1].
+The 3D character model is a (younger) version of Fridolin, which we reconstructed from a 3D scan following the process documented in [this paper][1], see [preprint][2].
 It can easily be exchanged for other, rigged character models.
 
 DAIMON consists of several service wrappers, most notably the DaimonManager script, which ties all other services together.
@@ -55,4 +55,9 @@ LANGUAGE_TRANSLATOR_AUTH_TYPE=iam
 
 DAIMON uses SALSA, which is a for-pay Unity package. You can obtain your own copy [here](http://crazyminnowstudio.com/projects/salsa-with-randomeyes-lipsync/).
 
-[1]: Xinyu Huang, Fridolin Wild, John Twycross (2019): A process for the semi-automated generation of life-sized, interactive 3D character models for holographic projection, In: International Conference on 3D Immersion (IC3D), December 11, 2019, Brussels, Belgium, IEEE, [link](https://ieeexplore.ieee.org/document/8975993), [preprint](Documentation/2019-ic3d-huang-wild-twycross.pdf)
+[1]: https://ieeexplore.ieee.org/document/8975993i
+[2]: Documentation/2019-ic3d-huang-wild-twycross.pdf
+
+## References
+
+Xinyu Huang, Fridolin Wild, John Twycross (2019): A process for the semi-automated generation of life-sized, interactive 3D character models for holographic projection, In: International Conference on 3D Immersion (IC3D), December 11, 2019, Brussels, Belgium, IEEE, [link](https://ieeexplore.ieee.org/document/8975993), [preprint](Documentation/2019-ic3d-huang-wild-twycross.pdf)
