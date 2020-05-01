@@ -66,12 +66,17 @@ DAIMON uses SALSA, which is a for-pay Unity package. You can obtain your own cop
 [1]: https://ieeexplore.ieee.org/document/8975993i
 [2]: Documentation/2019-ic3d-huang-wild-twycross.pdf
 
+## WebGL Microphone Support
+
+WebGL in Unity currently does not provide native support for access to the microphone, so we have obtained a copy of FrostweepGames WebGL Microphone Library, which is commercially available through the asset store. 
+
 ## License
 
 All original parts of this project are licensed under Apache 2.0. The IBM Watson 
 Unity SDK and the IBM Unity SDK core are also governed by an Apache 2.0 license. 
-SALSA is commercial and you will have to obtain your own license. The 
-full Apache 2.0 license text is available in [LICENSE](LICENSE.md).
+SALSA is commercial and you will have to obtain your own license. 
+WebGL Microphone is commercial and you will have to obtain your own license.
+The full Apache 2.0 license text is available in [LICENSE](LICENSE.md).
 
 ## References
 
