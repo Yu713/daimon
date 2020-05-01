@@ -30,6 +30,7 @@ using IBM.Cloud.SDK.DataTypes;
 using IBM.Cloud.SDK.Connection;
 using IBM.Cloud.SDK.Logging;
 using System;
+using FrostweepGames.Plugins.Native;
 
 public class SpeechInputService : MonoBehaviour
 {
@@ -49,7 +50,6 @@ public class SpeechInputService : MonoBehaviour
     // https://www.ibm.com/watson/developercloud/speech-to-text/api/v1/curl.html?curl#get-model
     [Tooltip("The Model to use. This defaults to en-US_BroadbandModel")]
     public string _recognizeModel;
-
 
     private LangTransService myTranslator;
     private SpeechOutputService myTTS;
@@ -71,8 +71,6 @@ public class SpeechInputService : MonoBehaviour
     private SpeechToTextService _service;
 
     //string _testString = "<speak version=\"1.0\"><express-as type=\"Hi\">Hi How are you today!</express-as></speak>";
-
-   
 
     void Start()
     {
@@ -166,7 +164,7 @@ public class SpeechInputService : MonoBehaviour
     {
         if (_recordingRoutine != 0)
         {
-            Microphone.End(_microphoneID);
+            CustomMicrophone.End(_microphoneID);
             Runnable.Stop(_recordingRoutine);
             _recordingRoutine = 0;
         }
@@ -182,7 +180,7 @@ public class SpeechInputService : MonoBehaviour
     private IEnumerator RecordingHandler()
     {
         //Log.Debug("STT.RecordingHandler()", "devices: {0}", Microphone.devices);
-        _recording = Microphone.Start(_microphoneID, true, _recordingBufferSize, _recordingHZ);
+        _recording = CustomMicrophone.Start(_microphoneID, true, _recordingBufferSize, _recordingHZ);
         yield return null;      // let _recordingRoutine get set..
 
         if (_recording == null)
@@ -197,8 +195,8 @@ public class SpeechInputService : MonoBehaviour
 
         while (_recordingRoutine != 0 && _recording != null)
         {
-            int writePos = Microphone.GetPosition(_microphoneID);
-            if (writePos > _recording.samples || !Microphone.IsRecording(_microphoneID))
+            int writePos = CustomMicrophone.GetPosition(_microphoneID);
+            if (writePos > _recording.samples || !CustomMicrophone.IsRecording(_microphoneID))
             {
                 Log.Error("STT.RecordingHandler()", "Microphone disconnected.");
 
