@@ -1,4 +1,4 @@
-﻿/**
+/**
 * Copyright 2019 IBM Corp. All Rights Reserved.
 *
 * Licensed under the Apache License, Version 2.0 (the "License");
@@ -19,10 +19,11 @@ using IBM.Cloud.SDK.Utilities;
 using IBM.Cloud.SDK.Authentication;
 using System;
 using System.Collections.Generic;
+using UnityEngine;
 
 namespace IBM.Cloud.SDK
 {
-    public class BaseService
+	public class BaseService
     {
         protected Credentials credentials;
         protected string url;
@@ -33,6 +34,8 @@ namespace IBM.Cloud.SDK
             var credentialsPaths = Utility.GetCredentialsPaths();
             if (credentialsPaths.Count > 0)
             {
+				//MonoBehaviour.print("found a environment file: " + credentialsPaths[0] );
+				
                 foreach (string path in credentialsPaths)
                 {
                     if (Utility.LoadEnvFile(path))
@@ -42,6 +45,7 @@ namespace IBM.Cloud.SDK
                 }
 
                 string ApiKey = Environment.GetEnvironmentVariable(serviceId.ToUpper() + "_IAM_APIKEY");
+				MonoBehaviour.print("API key for "+serviceId+" = " + ApiKey );
                 // check for old IAM API key name as well
                 if (string.IsNullOrEmpty(ApiKey)) {
                     ApiKey = Environment.GetEnvironmentVariable(serviceId.ToUpper() + "_APIKEY");

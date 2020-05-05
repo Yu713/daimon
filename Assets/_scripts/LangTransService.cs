@@ -1,4 +1,4 @@
-﻿using System.Collections;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
@@ -18,8 +18,8 @@ public class LangTransService : MonoBehaviour
 
     public string translationModel = "en-de";
     public string versionDate = "2018-12-19";
-    public string apiKey = "htouiGDBVSOcjKYQSwgIC71hDcxKCQMJGLDCT8mWBbJ5";
-    public string serviceUrl = "https://gateway-lon.watsonplatform.net/language-translator/api";
+    //public string apiKey = "";
+    //public string serviceUrl = "https://gateway-lon.watsonplatform.net/language-translator/api";
 
     public string lastTranslationResult = null;
 
@@ -32,14 +32,19 @@ public class LangTransService : MonoBehaviour
 
     private IEnumerator ConnectToTranslationService()
     {
+		/*
         TokenOptions languageTranslatorTokenOptions = new TokenOptions()
         {
             IamApiKey = apiKey
         };
         Credentials languageTranslatorCredentials = new Credentials(languageTranslatorTokenOptions, serviceUrl);
         while (!languageTranslatorCredentials.HasIamTokenData()) yield return null;
-
-        languageTranslatorService = new LanguageTranslatorService(versionDate, languageTranslatorCredentials);
+		 
+		 languageTranslatorService = new LanguageTranslatorService(versionDate, languageTranslatorCredentials);
+		 
+*/
+        languageTranslatorService = new LanguageTranslatorService(versionDate);
+		while (!languageTranslatorService.Credentials.HasIamTokenData()) yield return null;
 
         //Translate("Where is the library");
     }

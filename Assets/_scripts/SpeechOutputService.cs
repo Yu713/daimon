@@ -1,4 +1,4 @@
-﻿using System.Collections;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
@@ -21,8 +21,8 @@ public class SpeechOutputService : MonoBehaviour
     private TextToSpeechService myService;
 
     public string versionDate = "2018-12-19";
-    public string apiKey = "hQ37RvPZw2T6ppxja9t5Z3oH0azs49nPCtZPbJuYSrhr"; 
-    public string serviceUrl = "https://gateway-lon.watsonplatform.net/text-to-speech/api"; 
+    //public string apiKey = "";
+    //public string serviceUrl = "https://gateway-lon.watsonplatform.net/text-to-speech/api";
 
     public string myVoice = "en-US_MichaelVoice";
 
@@ -41,6 +41,7 @@ public class SpeechOutputService : MonoBehaviour
     {
         LogSystem.InstallDefaultReactors();
         audioSrc = GameObject.Find("02 FW").GetComponent<AudioSource>();
+		
         dDaimonMgr = GetComponent<DaimonManager>();
 
         StartCoroutine(ConnectToTTSService());
@@ -49,14 +50,20 @@ public class SpeechOutputService : MonoBehaviour
        
     private IEnumerator ConnectToTTSService()
     {
+		/*
         TokenOptions myTokenOptions = new TokenOptions()
         {
             IamApiKey = apiKey
         };
         Credentials myCredentials = new Credentials(myTokenOptions, serviceUrl);
         while (!myCredentials.HasIamTokenData()) yield return null;
+		 
 
         myService = new TextToSpeechService(myCredentials);
+		 */
+		
+		myService = new TextToSpeechService();
+		while (!myService.Credentials.HasIamTokenData()) yield return null;
        
     }
 
@@ -87,6 +94,7 @@ public class SpeechOutputService : MonoBehaviour
         AudioClip clip = null;
         synthesizeResponse = response.Result;
         clip = WaveFile.ParseWAV("myClip", synthesizeResponse);
+		Debug.Log("before playing: " + clip);
         PlayClip(clip);
     }
 

@@ -1,4 +1,4 @@
-﻿using System.Collections;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
@@ -24,18 +24,19 @@ public class DialogueService : MonoBehaviour
     private fsSerializer _serializer = new fsSerializer();
 
     [Space(10)]
-    [Tooltip("The IAM apikey.")]
-    [SerializeField]
-    private string iamApikey = "X4udGLROceeDWMxy8aZ85p_AJLghkkwPtzYwF5IN5NVS";
-    [Tooltip("The service URL (optional). This defaults to \"https://gateway.watsonplatform.net/assistant/api\"")]
-    [SerializeField]
-    private string serviceUrl = "https://gateway-lon.watsonplatform.net/assistant/api";
+    //[Tooltip("The IAM apikey.")]
+    //[SerializeField]
+    //private string iamApikey = "";
+    //[Tooltip("The service URL (optional). This defaults to \"https://gateway.watsonplatform.net/assistant/api\"")]
+    //[SerializeField]
+    //private string serviceUrl = "https://gateway-lon.watsonplatform.net/assistant/api";
+	
     [Tooltip("The version date with which you would like to use the service in the form YYYY-MM-DD.")]
     [SerializeField]
     private string versionDate = "2019-02-28";
     [Tooltip("The assistantId to run the example.")]
     [SerializeField]
-    private string assistantId = "9437d854-b239-4054-b78b-c7b446731498";
+	private string assistantId = "fd4e26f9-5677-4136-910c-bd4cc6891e8d"; //9437d854-b239-4054-b78b-c7b446731498";
 
     public Animator anim;
 
@@ -62,9 +63,10 @@ public class DialogueService : MonoBehaviour
 
     private IEnumerator CreateService()
     {
+		/*
         if (string.IsNullOrEmpty(iamApikey))
         {
-            throw new IBMException("Plesae provide IAM ApiKey for the service.");
+            throw new IBMException("Please provide IAM ApiKey for the service.");
         }
 
         //  Create credential and instantiate service
@@ -81,9 +83,13 @@ public class DialogueService : MonoBehaviour
         //  Wait for tokendata
         while (!credentials.HasIamTokenData())
             yield return null;
+		*/
 
-        service = new AssistantService(versionDate, credentials);
+        service = new AssistantService(versionDate); //, credentials);
 
+		while (!service.Credentials.HasIamTokenData())
+		yield return null;
+		
         Runnable.Run(CreateSession());
 
         //Runnable.Run(Examples());
@@ -91,7 +97,7 @@ public class DialogueService : MonoBehaviour
 
     private IEnumerator CreateSession()
     {
-        //Log.Debug("ExampleAssistantV2.RunTest()", "Attempting to CreateSession");
+		Debug.Log("CONNECTING TO ASSISTANT: " + assistantId);
         service.CreateSession(OnCreateSession, assistantId);
 
         while (!createSessionTested)
@@ -140,21 +146,30 @@ public class DialogueService : MonoBehaviour
     private void OnResponseReceived(DetailedResponse<MessageResponse> response, IBMError error)
     {
 
-        Debug.Log("DialogueService response: " + response.Result.Output.Generic[0].Text);
+		if (response.Result.Output.Generic.Count > 0) {
+			Debug.Log("DialogueService response: " + response.Result.Output.Generic[0].Text);
+			if (response.Result.Output.Intents.Capacity > 0) Debug.Log("    -> " + response.Result.Output.Intents[0].Intent.ToString());
+		}
+		
+		if ( response.Result.Output.Intents.Capacity > 0 ) {
+		
+			string intent = response.Result.Output.Intents[0].Intent.ToString();
+			if (intent == "MakeDance")
+			{
+				MakeDance();
+			} else if (intent == "name")
+			{
+				// Debug.Log("    NAME === " + response.Result.Output.Entities[0].Entity.ToString() );
+				username = response.Result.Output.Entities.Find( (x) => x.Entity.ToString()=="sys-person").Value.ToString();
+				Debug.Log("username = " + username);
+			}
 
-        Debug.Log("    -> " + response.Result.Output.Intents[0].Intent.ToString());
-        string intent = response.Result.Output.Intents[0].Intent.ToString();
-        if (intent == "MakeDance")
-        {
-            MakeDance(); 
-        } else if (intent == "name")
-        {
-            // Debug.Log("    NAME === " + response.Result.Output.Entities[0].Entity.ToString() );
-            username = response.Result.Output.Entities.Find( (x) => x.Entity.ToString()=="sys-person").Value.ToString();
-            Debug.Log("username = " + username);
-        }
+			dSpeechOutputMgr.Speak(response.Result.Output.Generic[0].Text + ", " + username);
+			
+		} else {
+			dSpeechOutputMgr.Speak("I don't understand, can you rephrase?");
+		}
 
-        dSpeechOutputMgr.Speak(response.Result.Output.Generic[0].Text + ", " + username);
         //dSpeechInputMgr.Active = false;
 
         //myTTS.myVoice = "de-DE_DieterV3Voice";

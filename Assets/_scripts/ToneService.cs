@@ -1,4 +1,4 @@
-﻿using System.Collections;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using System.Text.RegularExpressions;
@@ -21,8 +21,8 @@ public class ToneService : MonoBehaviour
     private ToneService Tone;
 
     public string versionDate = "2019-07-03";
-    public string apiKey = "JV5coDf_n1lY9AIwNwAm5RBzLcOBzQhZME6YDc3OzAZC";
-    public string serviceUrl = "https://gateway-lon.watsonplatform.net/tone-analyzer/api";
+    //public string apiKey = "";
+    //public string serviceUrl = "https://gateway-lon.watsonplatform.net/tone-analyzer/api";
 
     private string _stringToTestTone1 = "START AND TEST - OK!";
     private string _stringToTestTone2 = "SECOND TEST - Failed Test Sucks";
