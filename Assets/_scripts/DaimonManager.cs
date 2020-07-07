@@ -15,6 +15,7 @@ public class DaimonManager : MonoBehaviour
 
 	public GameObject myCharacter;
 	private Animator myAnimator;
+	
     private Salsa3D salsa3D;
     public RandomEyes3D randomEyes;
     public GameObject[] lookTargets;
