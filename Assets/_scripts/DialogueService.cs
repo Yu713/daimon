@@ -21,6 +21,7 @@ public class DialogueService : MonoBehaviour
     private SpeechOutputService dSpeechOutputMgr;
     private SpeechInputService dSpeechInputMgr;
 	private UserProfile dUser;
+	private ExerciseController dEC;
 
     private fsSerializer _serializer = new fsSerializer();
 
@@ -170,6 +171,9 @@ public class DialogueService : MonoBehaviour
 				case "age":
 					dUser.age = response.Result.Output.Entities.Find( (x) => x.Entity.ToString()=="sys-number").Value;
 					Debug.Log("age = " + dUser.age);
+					if (dUser.age>65) {
+						dEC.Remove("B11");
+					}
 					break;
 				case "INsert the name of the dialogue step that is the last step in the dialogue here":
 					// call animator in the daimon manager
