@@ -13,6 +13,7 @@ using IBM.Cloud.SDK.Logging;
 using System;
 using IBM.Watson.Assistant.V2.Model;
 using FullSerializer;
+using System.Linq;
 
 public class DialogueService : MonoBehaviour
 {
@@ -41,6 +42,7 @@ public class DialogueService : MonoBehaviour
 	private string assistantId = "fd4e26f9-5677-4136-910c-bd4cc6891e8d"; //9437d854-b239-4054-b78b-c7b446731498";
 
     private AssistantService service;
+	private DaimonManager dAImgr;
 
     private string username;
 
@@ -53,6 +55,7 @@ public class DialogueService : MonoBehaviour
         LogSystem.InstallDefaultReactors();
 
         dSpeechOutputMgr = GetComponent<SpeechOutputService>();
+		dAImgr = GetComponent<DaimonManager>();
 		dUser = GetComponent<UserProfile>();
 		dEC = GetComponent<ExerciseController>();
 
@@ -177,7 +180,7 @@ public class DialogueService : MonoBehaviour
 				case "INsert the name of the dialogue step that is the last step in the dialogue here":
 					// call animator in the daimon manager
 					// play animation:
-					// animator.Play( dEC.Exercises[0] );
+					dAImgr.Animate( dEC.Exercises.first );
 					break;
 				default:
 					break;
