@@ -159,10 +159,11 @@ public class DialogueService : MonoBehaviour
 		if ( response.Result.Output.Intents.Capacity > 0 ) {
 		
 			string intent = response.Result.Output.Intents[0].Intent.ToString();
+			string actionName = response.Result.Output.Actions[0].Name;
 			
 			// check whether it is really the intent we want to check
 			// (or do we want to know the name of the dialogue step?)
-			switch (intent) {
+			switch (actionName) {
 				case "MakeDance":
 					MakeDance();
 					break;
