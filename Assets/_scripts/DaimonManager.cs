@@ -1,4 +1,4 @@
-﻿using System.Collections;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using CrazyMinnow.SALSA;
@@ -13,6 +13,8 @@ public class DaimonManager : MonoBehaviour
     public SpeechInputService mySpeechInputMgr;
     private SpeechOutputService mySpeechOutputMgr;
 
+	public GameObject myCharacter;
+	private Animator myAnimator;
     private Salsa3D salsa3D;
     public RandomEyes3D randomEyes;
     public GameObject[] lookTargets;
@@ -36,6 +38,7 @@ public class DaimonManager : MonoBehaviour
         dDialogMgr = GetComponent<DialogueService>();
         mySpeechInputMgr = GetComponent<SpeechInputService>();
         mySpeechOutputMgr = GetComponent<SpeechOutputService>();
+		myAnimator = myCharacter.GetComponent<Animator>();
     }
 
 
@@ -75,4 +78,17 @@ public class DaimonManager : MonoBehaviour
 
         }
     }
+	
+	void Animate( string exercise ) {
+		
+		switch (exercise) {
+			case "B12":
+				myAnimator.Play("B12");
+				break;
+			default:
+				break;
+		}
+		
+	}
+	
 }

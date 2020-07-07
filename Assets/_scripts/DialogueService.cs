@@ -20,6 +20,7 @@ public class DialogueService : MonoBehaviour
     public Text ResponseTextField; // inspector slot for drag & drop of the Canvas > Text gameobject
     private SpeechOutputService dSpeechOutputMgr;
     private SpeechInputService dSpeechInputMgr;
+	private UserProfile dUser;
 
     private fsSerializer _serializer = new fsSerializer();
 
@@ -53,6 +54,7 @@ public class DialogueService : MonoBehaviour
         LogSystem.InstallDefaultReactors();
 
         dSpeechOutputMgr = GetComponent<SpeechOutputService>();
+		dUser = GetComponent<UserProfile>();
 
         dSpeechInputMgr = GetComponent<SpeechInputService>();
         dSpeechInputMgr.onInputReceived += OnInputReceived;
@@ -154,14 +156,26 @@ public class DialogueService : MonoBehaviour
 		if ( response.Result.Output.Intents.Capacity > 0 ) {
 		
 			string intent = response.Result.Output.Intents[0].Intent.ToString();
-			if (intent == "MakeDance")
-			{
-				MakeDance();
-			} else if (intent == "name")
-			{
-				// Debug.Log("    NAME === " + response.Result.Output.Entities[0].Entity.ToString() );
-				username = response.Result.Output.Entities.Find( (x) => x.Entity.ToString()=="sys-person").Value.ToString();
-				Debug.Log("username = " + username);
+			
+			// check whether it is really the intent we want to check
+			// (or do we want to know the name of the dialogue step?)
+			switch (intent) {
+				case "MakeDance":
+					MakeDance();
+					break;
+				case "name":
+					username = response.Result.Output.Entities.Find( (x) => x.Entity.ToString()=="sys-person").Value.ToString();
+					Debug.Log("username = " + username);
+					break;
+				case "age":
+					dUser.age = response.Result.Output.Entities.Find( (x) => x.Entity.ToString()=="sys-number").Value;
+					Debug.Log("age = " + dUser.age);
+					break;
+				case "INsert the name of the dialogue step that is the last step in the dialogue here":
+					// call animator in the daimon manager
+					break;
+				default:
+					break;
 			}
 
 			dSpeechOutputMgr.Speak(response.Result.Output.Generic[0].Text + ", " + username);
