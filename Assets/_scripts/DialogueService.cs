@@ -40,8 +40,6 @@ public class DialogueService : MonoBehaviour
     [SerializeField]
 	private string assistantId = "fd4e26f9-5677-4136-910c-bd4cc6891e8d"; //9437d854-b239-4054-b78b-c7b446731498";
 
-    public Animator anim;
-
     private AssistantService service;
 
     private string username;
@@ -56,6 +54,7 @@ public class DialogueService : MonoBehaviour
 
         dSpeechOutputMgr = GetComponent<SpeechOutputService>();
 		dUser = GetComponent<UserProfile>();
+		dEC = GetComponent<ExerciseController>();
 
         dSpeechInputMgr = GetComponent<SpeechInputService>();
         dSpeechInputMgr.onInputReceived += OnInputReceived;
@@ -177,6 +176,8 @@ public class DialogueService : MonoBehaviour
 					break;
 				case "INsert the name of the dialogue step that is the last step in the dialogue here":
 					// call animator in the daimon manager
+					// play animation:
+					// animator.Play( dEC.Exercises[0] );
 					break;
 				default:
 					break;
