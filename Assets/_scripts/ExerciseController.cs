@@ -10,7 +10,7 @@ public class ExerciseController : MonoBehaviour
     public UserProfile UserProfile; //data from users
 
     //public static ExerciseController Instance;
-    public List<ExerciseGen> ; 
+   // public List<ExerciseGen>; 
     
 
     private enum ExerciseOutputs //list all exercises
@@ -58,43 +58,43 @@ public class ExerciseController : MonoBehaviour
 
     }
 
-    public Dictionary<string, string> Exercises;
+    public List<string> Exercises;
     public void Reset()
     {
         Exercises.Clear();
-        Exercises.Add("A1", "A1");
-        Exercises.Add("A14", "A14");
-        Exercises.Add("A15", "A15");
-        Exercises.Add("A21", "A21");
-        Exercises.Add("B", "B");
-        Exercises.Add("B11", "B11");
-        Exercises.Add("B12", "B12");
-        Exercises.Add("B13", "B13");
-        Exercises.Add("B14STS", "B14STS");
-        Exercises.Add("B22", "B22");
-        Exercises.Add("B32", "B32");
-        Exercises.Add("B33", "B33");
-        Exercises.Add("B41", "B41");
-        Exercises.Add("B41Y", "B41Y");
-        Exercises.Add("B42", "B42");
-        Exercises.Add("B51", "B51");
-        Exercises.Add("B51CircleCrunch", "B51CircleCrunch");
-        Exercises.Add("B52", "B52");
-        Exercises.Add("B61", "B61");
-        Exercises.Add("B62", "B62");
-        Exercises.Add("B72", "B72");
-        Exercises.Add("B82JumpingJacks", "B82JumpingJacks");
-        Exercises.Add("B83", "B83");
-        Exercises.Add("B86", "B86");
-        Exercises.Add("B1230", "B1230");
-        Exercises.Add("B4260", "B4260");
-        Exercises.Add("B7230", "B7230");
-        Exercises.Add("B8330", "B8330");
-        Exercises.Add("B8630", "B8630");
-        Exercises.Add("B62120", "B62120");
-        Exercises.Add("Plank", "Plank");
-        Exercises.Add("PushUp", "PushUp");
-        Exercises.Add("Upright", "Upright");
+        Exercises.Add("A1");
+        Exercises.Add("A14");
+        Exercises.Add("A15");
+        Exercises.Add("A21");
+        Exercises.Add("B");
+        Exercises.Add("B11");
+        Exercises.Add("B12");
+        Exercises.Add("B13");
+        Exercises.Add("B14STS");
+        Exercises.Add("B22");
+        Exercises.Add("B32");
+        Exercises.Add("B33");
+        Exercises.Add("B41");
+        Exercises.Add("B41Y");
+        Exercises.Add("B42");
+        Exercises.Add("B51");
+        Exercises.Add("B51CircleCrunch");
+        Exercises.Add("B52");
+        Exercises.Add("B61");
+        Exercises.Add("B62");
+        Exercises.Add("B72");
+        Exercises.Add("B82JumpingJacks");
+        Exercises.Add("B83");
+        Exercises.Add("B86");
+        Exercises.Add("B1230");
+        Exercises.Add("B4260");
+        Exercises.Add("B7230");
+        Exercises.Add("B8330");
+        Exercises.Add("B8630");
+        Exercises.Add("B62120");
+        Exercises.Add("Plank");
+        Exercises.Add("PushUp");
+        Exercises.Add("Upright");
     }
 
     public List<ExerciseOutputs> ExcludeExercises(UserProfile questions)
