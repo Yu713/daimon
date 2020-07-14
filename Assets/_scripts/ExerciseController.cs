@@ -4,10 +4,10 @@ using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 
-public class ExerciseController : MonoBehaviour
+public class ExerciseController : MonoBehaviour //This is added master branch
 {
 	
-	public Dictionary<string> Exercises;
+	public List<string> Exercises;
 	
 
     public void Reset()
