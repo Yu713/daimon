@@ -79,13 +79,19 @@ public class DaimonManager : MonoBehaviour
 
         }
     }
-	
-	void Animate( string exercise ) {
+
+
+    // check for exercise name (from ExerciseController.cs)
+    // and run the according animation (in myAnimator)
+	public void Animate( string exercise ) {
 		
 		switch (exercise) {
 			case "B12":
 				myAnimator.Play("B12");
 				break;
+            case "waving":
+                myAnimator.Play("waving");
+                break;
 			default:
 				break;
 		}

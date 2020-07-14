@@ -8,48 +8,46 @@ public class UserProfile : MonoBehaviour
     public SpeechInputService mySpeechInputMgr;
     public ExerciseController ExerciseController;
 
-    //public int age;
+    // -  -  -  -  -  -  -  -  -  -  -  -  -  -
 
-    public class Question
-    {
-        public Profiles ID { get; set; } //get read, set write
-        public string Content { get; set; }
-        public bool IsFreestyle { get; set; }
-        public List<string> Responses { get; set; }
-        public string Answer { get; set; }
+    public string Name;
 
-
+    public enum gender { male, female };
+    public gender Gender;
     
-    }
+    public int Age;
 
+    public double bmi;
+    public int Height;
+    public int Weight;
 
-
-    public enum Profiles
+    public enum cancers
     {
-        Name,
-        Gender,
-        Age,
-        Height,
-        Weigh,
-        CancerType,
-        PhysicalExerciseFrequency,
-        ExericseFrequency,
-        Feeling,
-        TreatmentTime,
-        CardiovascularDiseases,
-        Pain,
-    }
 
-    public class Questions
-    {
-     //   public bool ShouldSelect { get; set; }
-        public AudioClip AudioClip { get; set; }
+    };
+    public cancers CancerType;
 
-    }
-    
+    public enum Frequency {
+        threeMonths,
+        threeToSixMonths
+    };
+    public Frequency PhysicalExerciseFrequency;
+    public Frequency ExerciseFrequency;
 
-	
-	
+    public enum feelings {good, bad};
+    public feelings Feeling;
+
+    public enum TreatmentTime { };
+    public TreatmentTime treated;
+
+    public enum CVdiseases { };
+    public CVdiseases CardiovascularDiseases;
+
+    public enum pains { };
+    public pains Pain;
+
+    // -  -  -  -  -  -  -  -  -  -  -  -  -  -  
+
     // Start is called before the first frame update
     void Start()
     {

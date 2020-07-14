@@ -21,6 +21,7 @@ public class DialogueService : MonoBehaviour
     public Text ResponseTextField; // inspector slot for drag & drop of the Canvas > Text gameobject
     private SpeechOutputService dSpeechOutputMgr;
     private SpeechInputService dSpeechInputMgr;
+
 	private UserProfile dUser;
 	private ExerciseController dEC;
 
@@ -144,8 +145,7 @@ public class DialogueService : MonoBehaviour
     private void MakeDance()
     {
         Debug.Log(">>> Starting to dance");
-        anim.Play("Waving", -1, 0);
-
+        dAImgr.Animate("Waving");
     }
 
     private void OnResponseReceived(DetailedResponse<MessageResponse> response, IBMError error)
@@ -155,41 +155,74 @@ public class DialogueService : MonoBehaviour
 			Debug.Log("DialogueService response: " + response.Result.Output.Generic[0].Text);
 			if (response.Result.Output.Intents.Capacity > 0) Debug.Log("    -> " + response.Result.Output.Intents[0].Intent.ToString());
 		}
-		
-		if ( response.Result.Output.Intents.Capacity > 0 ) {
-		
-			string intent = response.Result.Output.Intents[0].Intent.ToString();
-			string actionName = response.Result.Output.Actions[0].Name;
-			
-			// check whether it is really the intent we want to check
-			// (or do we want to know the name of the dialogue step?)
-			switch (actionName) {
-				case "MakeDance":
-					MakeDance();
-					break;
-				case "name":
-					username = response.Result.Output.Entities.Find( (x) => x.Entity.ToString()=="sys-person").Value.ToString();
-					Debug.Log("username = " + username);
-					break;
-				case "age":
-					dUser.age = response.Result.Output.Entities.Find( (x) => x.Entity.ToString()=="sys-number").Value;
-					Debug.Log("age = " + dUser.age);
-					if (dUser.age>65) {
-						dEC.Remove("B11");
-					}
-					break;
-				case "INsert the name of the dialogue step that is the last step in the dialogue here":
-					// call animator in the daimon manager
-					// play animation:
-					dAImgr.Animate( dEC.Exercises.first );
-					break;
-				default:
-					break;
-			}
 
-			dSpeechOutputMgr.Speak(response.Result.Output.Generic[0].Text + ", " + username);
+        string dialogueNodeTitle = response.Result.Output.Debug.NodesVisited.Last().Title;
+        Debug.Log("current Dialogue Node Title = " + dialogueNodeTitle);
+
+        if (dialogueNodeTitle== "Welcome")
+        {
+            Debug.Log("We are in the node called 'Welcome'");
+        }
+
+        // response.Result.Output.Debug.NodesVisited.Capacity > 0
+        if ( response.Result.Output.Intents.Capacity > 0 || response.Result.Output.Actions.Capacity > 0 ) {
+
+            if (response.Result.Output.Intents.Capacity > 0 )
+            {
+                string answerIntent = response.Result.Output.Intents[0].Intent.ToString();
+
+                switch (answerIntent)
+                {
+                    case "MakeDance":
+                        MakeDance();
+                        break;
+                    case "#S0-GenderMale": // might also be without hashtag? not sure
+                        dUser.Gender = UserProfile.gender.male;
+                        break;
+                    case "#S0-GenderFemale":
+                        dUser.Gender = UserProfile.gender.female;
+                        break;
+                    case "#S0-Birthyear":
+                        dUser.Age = System.DateTime.Now.Year - int.Parse(response.Result.Output.Entities.Find((x) => x.Entity.ToString() == "sys-number").Value);
+                        break;
+                    case "name":
+                        username = response.Result.Output.Entities.Find((x) => x.Entity.ToString() == "sys-person").Value.ToString();
+                        Debug.Log("username = " + username);
+                        break;
+                    default:
+                        break;
+                }
+
+            } else if (response.Result.Output.Actions.Capacity > 0)
+            {
+
+                string actionName = response.Result.Output.Actions[0].Name;
+                // check whether it is really the intent we want to check
+                // (or do we want to know the name of the dialogue step?)
+                switch (actionName)
+                {
+                    case "makeWave":
+                        dAImgr.Animate("waving");
+                        break;
+                    default:
+                        break;
+                }
+
+            }
 			
-		} else {
+			
+
+			dSpeechOutputMgr.Speak(response.Result.Output.Generic[0].Text ); // + ", " + username
+
+            // now all data has been extracted, so we can run through the list of exclusions
+            UpdateExercises();
+
+            if ( (dialogueNodeTitle == "S3.1.2-Where Pain") || dialogueNodeTitle == "S3.1.2-Where Pain") // replace with name of the last question
+            {
+                Debug.Log("Asked all questions, nothing else can be asked!");
+            }
+
+        } else {
 			dSpeechOutputMgr.Speak("I don't understand, can you rephrase?");
 		}
 
@@ -257,6 +290,29 @@ public class DialogueService : MonoBehaviour
         //{
         //    Log.Debug("Extract outputText", "Failed to extract outputText and set for speaking");
         //}
+    }
+
+    public void UpdateExercises()
+    {
+
+        if ((dUser.Weight != 0) && (dUser.Height != 0))
+        {
+            dUser.bmi = dUser.Weight / (dUser.Height / 100) ^ 2;
+            if (dUser.bmi > 30.0f)
+            {
+                // = person is obese
+                // so let's remove the exercises A3.1 B8.1 B8.2,B8.4, C1.1
+                dEC.RemoveExercise("A31");
+                dEC.RemoveExercise("B81");
+                dEC.RemoveExercise("B82");
+                dEC.RemoveExercise("B84");
+                dEC.RemoveExercise("C11");
+            }
+
+        } // user profile contains weight and height
+
+
+
     }
 
     public void OnInputReceived(string text )
