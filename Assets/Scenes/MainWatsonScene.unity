@@ -441,13 +441,13 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1391086061}
-  m_LocalRotation: {x: 0.11032903, y: -0, z: -0, w: 0.9938951}
-  m_LocalPosition: {x: 0, y: 1.32, z: -2.83}
+  m_LocalRotation: {x: 0.0976071, y: -0, z: -0, w: 0.9952251}
+  m_LocalPosition: {x: 0, y: 1.6, z: -3.65}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: 12.669001, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: 11.203, y: 0, z: 0}
 --- !u!1 &1428860024
 GameObject:
   m_ObjectHideFlags: 0
@@ -719,9 +719,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7772641d89ea835409f11636c2f185d5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  mySpeechInputMgr: {fileID: 0}
-  myCharacter: {fileID: 0}
-  randomEyes: {fileID: 0}
+  mySpeechInputMgr: {fileID: 1646685150}
+  myCharacter: {fileID: 1865630689}
+  randomEyes: {fileID: 1865630694}
   lookTargets: []
   wait: 0
   check: 0
@@ -890,7 +890,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 400128, guid: 7060c891126886144b8bf1c0b717ca6d, type: 3}
       propertyPath: m_LocalRotation.y
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 400128, guid: 7060c891126886144b8bf1c0b717ca6d, type: 3}
       propertyPath: m_LocalRotation.z
@@ -898,7 +898,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 400128, guid: 7060c891126886144b8bf1c0b717ca6d, type: 3}
       propertyPath: m_LocalRotation.w
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 400128, guid: 7060c891126886144b8bf1c0b717ca6d, type: 3}
       propertyPath: m_RootOrder
@@ -910,7 +910,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 400128, guid: 7060c891126886144b8bf1c0b717ca6d, type: 3}
       propertyPath: m_LocalEulerAnglesHint.y
-      value: 0
+      value: 180
       objectReference: {fileID: 0}
     - target: {fileID: 400128, guid: 7060c891126886144b8bf1c0b717ca6d, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
