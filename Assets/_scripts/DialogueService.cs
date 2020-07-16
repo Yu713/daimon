@@ -92,8 +92,8 @@ public class DialogueService : MonoBehaviour
 
         service = new AssistantService(versionDate); //, credentials);
 
-		while (!service.Credentials.HasIamTokenData())
-		yield return null;
+		while (!service.Authenticator.CanAuthenticate()) // .Credentials.HasIamTokenData()
+            yield return null;
 		
         Runnable.Run(CreateSession());
 
@@ -155,7 +155,9 @@ public class DialogueService : MonoBehaviour
 			if (response.Result.Output.Intents.Capacity > 0) Debug.Log("    -> " + response.Result.Output.Intents[0].Intent.ToString());
 		}
 
-        string dialogueNodeTitle = response.Result.Output.Debug.NodesVisited.Last().Title;
+        Debug.Log("BLA : "+ response.Result.Output.Debug.BranchExited.ToString());
+        //Debug.Log("JSON:" +JsonUtility.ToJson(response.Result.Output.Debug))
+        string dialogueNodeTitle = response.Result.Output.Debug.NodesVisited.First().Title.ToString();
         Debug.Log("current Dialogue Node Title = " + dialogueNodeTitle);
 
         if (dialogueNodeTitle== "Welcome")

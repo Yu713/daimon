@@ -63,8 +63,8 @@ public class SpeechOutputService : MonoBehaviour
 		 */
 		
 		myService = new TextToSpeechService();
-		while (!myService.Credentials.HasIamTokenData()) yield return null;
-       
+		while (!myService.Authenticator.CanAuthenticate()) yield return null; // .Credentials.HasIamTokenData()
+
     }
 
     public void Speak(string text)
