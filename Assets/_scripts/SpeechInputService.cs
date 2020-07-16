@@ -44,7 +44,7 @@ public class SpeechInputService : MonoBehaviour
 
     //[Header("IAM Authentication")]
     //[Tooltip("The IAM apikey.")]
-    //public string iamApikey = "";
+    //public string iamApikey = "zngKvVILMGV_58ZIMDxnCuYnyKM4PUzsLCRSlYTRoCHJ";
 
     [Header("Parameters")]
     // https://www.ibm.com/watson/developercloud/speech-to-text/api/v1/curl.html?curl#get-model
