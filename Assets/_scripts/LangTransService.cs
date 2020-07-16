@@ -4,6 +4,7 @@ using UnityEngine;
 using UnityEngine.UI;
 using IBM.Cloud.SDK.Utilities;
 using IBM.Cloud.SDK.Authentication;
+using IBM.Cloud.SDK.Authentication.Iam;
 using IBM.Cloud.SDK;
 using IBM.Watson.LanguageTranslator.V3;
 using IBM.Watson.LanguageTranslator.V3.Model;
@@ -27,24 +28,14 @@ public class LangTransService : MonoBehaviour
     void Start()
     {
         LogSystem.InstallDefaultReactors();
-        StartCoroutine(ConnectToTranslationService());
+        Runnable.Run(ConnectToTranslationService());
     }
 
     private IEnumerator ConnectToTranslationService()
     {
-		/*
-        TokenOptions languageTranslatorTokenOptions = new TokenOptions()
-        {
-            IamApiKey = apiKey
-        };
-        Credentials languageTranslatorCredentials = new Credentials(languageTranslatorTokenOptions, serviceUrl);
-        while (!languageTranslatorCredentials.HasIamTokenData()) yield return null;
-		 
-		 languageTranslatorService = new LanguageTranslatorService(versionDate, languageTranslatorCredentials);
-		 
-*/
+
         languageTranslatorService = new LanguageTranslatorService(versionDate);
-		while (!languageTranslatorService.Credentials.HasIamTokenData()) yield return null;
+		while (!languageTranslatorService.Authenticator.CanAuthenticate()) yield return null;
 
         //Translate("Where is the library");
     }
@@ -64,8 +55,8 @@ public class LangTransService : MonoBehaviour
     private void OnTranslate(DetailedResponse<TranslationResult> response, IBMError error)
     {
         //  Populate text field with TranslationOutput
-        ResponseTextField.text = response.Result.Translations[0].TranslationOutput;
-        lastTranslationResult = response.Result.Translations[0].TranslationOutput;
+        ResponseTextField.text = response.Result.Translations[0]._Translation;
+        lastTranslationResult = response.Result.Translations[0]._Translation;
     }
 
 }

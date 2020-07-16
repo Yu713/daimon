@@ -113,8 +113,8 @@ public class SpeechInputService : MonoBehaviour
 		
 		_service = new SpeechToTextService();
 		
-		while (!_service.Credentials.HasIamTokenData()) yield return null;
-		
+		while (!_service.Authenticator.CanAuthenticate()) yield return null; // .Credentials.HasIamTokenData()
+
         _service.StreamMultipart = true;
 
         Active = true;
@@ -153,6 +153,7 @@ public class SpeechInputService : MonoBehaviour
 
     public void StartRecording()
     {
+
         if (_recordingRoutine == 0)
         {
             UnityObjectUtil.StartDestroyQueue();
@@ -181,6 +182,7 @@ public class SpeechInputService : MonoBehaviour
     {
         //Log.Debug("STT.RecordingHandler()", "devices: {0}", Microphone.devices);
         _recording = CustomMicrophone.Start(_microphoneID, true, _recordingBufferSize, _recordingHZ);
+
         yield return null;      // let _recordingRoutine get set..
 
         if (_recording == null)
@@ -199,7 +201,6 @@ public class SpeechInputService : MonoBehaviour
             if (writePos > _recording.samples || !CustomMicrophone.IsRecording(_microphoneID))
             {
                 Log.Error("STT.RecordingHandler()", "Microphone disconnected.");
-
                 StopRecording();
                 yield break;
             }
