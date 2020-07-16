@@ -40,7 +40,7 @@ public class SpeechOutputService : MonoBehaviour
     void Start()
     {
         LogSystem.InstallDefaultReactors();
-        audioSrc = GameObject.Find("Female").GetComponent<AudioSource>();
+        audioSrc = GameObject.Find("Shonah").GetComponent<AudioSource>();
 		
         dDaimonMgr = GetComponent<DaimonManager>();
 
