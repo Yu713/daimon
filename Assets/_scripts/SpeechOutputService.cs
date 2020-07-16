@@ -40,7 +40,7 @@ public class SpeechOutputService : MonoBehaviour
     void Start()
     {
         LogSystem.InstallDefaultReactors();
-        audioSrc = GameObject.Find("Shonah").GetComponent<AudioSource>();
+        audioSrc = GameObject.Find("HoloAI").GetComponent<AudioSource>();
 		
         dDaimonMgr = GetComponent<DaimonManager>();
 
