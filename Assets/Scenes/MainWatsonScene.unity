@@ -220,6 +220,12 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0, y: 0}
+--- !u!1 &762226816 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 100128, guid: 7060c891126886144b8bf1c0b717ca6d,
+    type: 3}
+  m_PrefabInstance: {fileID: 1865630688}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &921130037
 GameObject:
   m_ObjectHideFlags: 0
@@ -523,12 +529,12 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1646685151}
-  - component: {fileID: 1646685150}
-  - component: {fileID: 1646685152}
   - component: {fileID: 1646685153}
+  - component: {fileID: 1646685150}
   - component: {fileID: 1646685154}
-  - component: {fileID: 1646685155}
   - component: {fileID: 1646685156}
+  - component: {fileID: 1646685152}
+  - component: {fileID: 1646685155}
   - component: {fileID: 1646685157}
   m_Layer: 0
   m_Name: WatsonServices
@@ -720,7 +726,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   mySpeechInputMgr: {fileID: 1646685150}
-  myCharacter: {fileID: 1865630689}
+  myCharacter: {fileID: 762226816}
   randomEyes: {fileID: 1865630694}
   lookTargets: []
   wait: 0
@@ -741,7 +747,7 @@ MonoBehaviour:
   mySpeechInputMgr: {fileID: 1646685150}
   ExerciseController: {fileID: 0}
   Name: 
-  Gender: 0
+  Gender: 1
   Age: 0
   bmi: 0
   Height: 0
@@ -1099,7 +1105,7 @@ MonoBehaviour:
   m_Script: {fileID: 1624661579, guid: 7a255d2e87aae364fbd819c455094253, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  salsa3D: {fileID: 0}
+  salsa3D: {fileID: 1865630693}
   skinnedMeshRenderer: {fileID: 1865630690}
   prevSkinnedMeshRenderer: {fileID: 1865630690}
   getSkndMshRndr: 0
@@ -1134,7 +1140,7 @@ MonoBehaviour:
   closeMax: 100
   eyePosition: {fileID: 921130037}
   eyePosVerify: {fileID: 921130037}
-  lookTarget: {fileID: 0}
+  lookTarget: {fileID: 762226816}
   lookTargetTracking: {fileID: 0}
   targetAffinity: 0
   targetAffinityPercentage: 0.5
