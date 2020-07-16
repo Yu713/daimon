@@ -40,8 +40,7 @@ public class DialogueService : MonoBehaviour
     private string versionDate = "2019-02-28";
     [Tooltip("The assistantId to run the example.")]
     [SerializeField]
-	private string assistantId = "fd4e26f9-5677-4136-910c-bd4cc6891e8d"; //9437d854-b239-4054-b78b-c7b446731498";
-
+	private string assistantId = "fd4e26f9-5677-4136-910c-bd4cc6891e8d"; 
     private AssistantService service;
 	private DaimonManager dAImgr;
 

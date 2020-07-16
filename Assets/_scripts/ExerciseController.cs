@@ -6,7 +6,6 @@ using UnityEngine;
 
 public class ExerciseController : MonoBehaviour
 {
-
     //list of exercises; we remove them bit by bit
     public List<string> Exercises;
 
@@ -21,7 +20,7 @@ public class ExerciseController : MonoBehaviour
         Exercises.Add("B11");
         Exercises.Add("B12");
         Exercises.Add("B13");
-        Exercises.Add("B14");
+        Exercises.Add("B14STS");
         Exercises.Add("B22");
         Exercises.Add("B32");
         Exercises.Add("B33");
@@ -52,9 +51,10 @@ public class ExerciseController : MonoBehaviour
     {
         Reset();
     }
-
-    public void RemoveExercise(string what){
+    public void RemoveExercise(string what)
+    {
         if (Exercises.Contains(what)) Exercises.Remove(what);
     }
+    }
 
-}
+
