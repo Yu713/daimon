@@ -854,11 +854,11 @@ GameObject:
   m_Component:
   - component: {fileID: 1646685151}
   - component: {fileID: 1646685150}
-  - component: {fileID: 1646685152}
-  - component: {fileID: 1646685153}
   - component: {fileID: 1646685154}
+  - component: {fileID: 1646685153}
   - component: {fileID: 1646685155}
   - component: {fileID: 1646685156}
+  - component: {fileID: 1646685152}
   - component: {fileID: 1646685157}
   m_Layer: 0
   m_Name: WatsonServices
@@ -940,7 +940,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   ResponseTextField: {fileID: 1863902092}
   versionDate: 2018-12-19
-  myVoice: en-US_MichaelVoice
+  myVoice: en-US_AllisonVoice
 --- !u!82 &1646685155
 AudioSource:
   m_ObjectHideFlags: 0

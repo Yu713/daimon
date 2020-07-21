@@ -21,10 +21,10 @@ public class SpeechOutputService : MonoBehaviour
     private TextToSpeechService myService;
 
     public string versionDate = "2018-12-19";
-    //public string apiKey = "";
+    //public string apiKey = "hQ37RvPZw2T6ppxja9t5Z3oH0azs49nPCtZPbJuYSrhr";
     //public string serviceUrl = "https://gateway-lon.watsonplatform.net/text-to-speech/api";
 
-    public string myVoice = "en-US_MichaelVoice";
+    public string myVoice = "en-US_AllisonVoice";
 
     public GameObject myCharacter;
 
@@ -43,7 +43,6 @@ public class SpeechOutputService : MonoBehaviour
     {
         LogSystem.InstallDefaultReactors();
         audioSrc = myCharacter.GetComponent<AudioSource>();
-		
         dDaimonMgr = GetComponent<DaimonManager>();
 
         StartCoroutine(ConnectToTTSService());
