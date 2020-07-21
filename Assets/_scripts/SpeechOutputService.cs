@@ -26,6 +26,8 @@ public class SpeechOutputService : MonoBehaviour
 
     public string myVoice = "en-US_MichaelVoice";
 
+    public GameObject myCharacter;
+
     private AudioClip AudioClip;
     private AudioSource audioSrc;
     private string _microphoneID = null;
@@ -40,7 +42,7 @@ public class SpeechOutputService : MonoBehaviour
     void Start()
     {
         LogSystem.InstallDefaultReactors();
-        audioSrc = GameObject.Find("Shonah").GetComponent<AudioSource>();
+        audioSrc = myCharacter.GetComponent<AudioSource>();
 		
         dDaimonMgr = GetComponent<DaimonManager>();
 
