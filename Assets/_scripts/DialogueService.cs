@@ -150,25 +150,20 @@ public class DialogueService : MonoBehaviour
     private void OnResponseReceived(DetailedResponse<MessageResponse> response, IBMError error)
     {
 
-		if (response.Result.Output.Generic.Count > 0) {
+		if (response.Result.Output.Generic != null && response.Result.Output.Generic.Count > 0) {
 			Debug.Log("DialogueService response: " + response.Result.Output.Generic[0].Text);
 			if (response.Result.Output.Intents.Capacity > 0) Debug.Log("    -> " + response.Result.Output.Intents[0].Intent.ToString());
 		}
 
-        Debug.Log("BLA : "+ response.Result.Output.Debug.BranchExited.ToString());
-        //Debug.Log("JSON:" +JsonUtility.ToJson(response.Result.Output.Debug))
-        string dialogueNodeTitle = response.Result.Output.Debug.NodesVisited.First().Title.ToString();
-        Debug.Log("current Dialogue Node Title = " + dialogueNodeTitle);
-
-        if (dialogueNodeTitle== "Welcome")
+        // check if Watson was able to make sense of the user input, otherwise ask to repeat the input
+        if (response.Result.Output.Intents == null && response.Result.Output.Actions == null)
         {
-            Debug.Log("We are in the node called 'Welcome'");
-        }
+            Debug.Log("I did not understand");
+            dSpeechOutputMgr.Speak("I don't understand, can you rephrase?");
 
-        // response.Result.Output.Debug.NodesVisited.Capacity > 0
-        if ( response.Result.Output.Intents.Capacity > 0 || response.Result.Output.Actions.Capacity > 0 ) {
+        } else {
 
-            if (response.Result.Output.Intents.Capacity > 0 )
+            if (response.Result.Output.Intents != null && response.Result.Output.Intents.Count > 0)
             {
                 string answerIntent = response.Result.Output.Intents[0].Intent.ToString();
 
@@ -177,13 +172,13 @@ public class DialogueService : MonoBehaviour
                     case "MakeDance":
                         MakeDance();
                         break;
-                    case "#S0-GenderMale": // might also be without hashtag? not sure
+                    case "S0-GenderMale": // might also be without hashtag? not sure
                         dUser.Gender = UserProfile.gender.male;
                         break;
-                    case "#S0-GenderFemale":
+                    case "S0-GenderFemale":
                         dUser.Gender = UserProfile.gender.female;
                         break;
-                    case "#S0-Birthyear":
+                    case "S0-Birthyear":
                         dUser.Age = System.DateTime.Now.Year - int.Parse(response.Result.Output.Entities.Find((x) => x.Entity.ToString() == "sys-number").Value);
                         break;
                     case "name":
@@ -194,7 +189,9 @@ public class DialogueService : MonoBehaviour
                         break;
                 }
 
-            } else if (response.Result.Output.Actions.Capacity > 0)
+            } // any intents recognised?
+
+            if (response.Result.Output.Actions != null && response.Result.Output.Actions.Count > 0)
             {
 
                 string actionName = response.Result.Output.Actions[0].Name;
@@ -209,23 +206,24 @@ public class DialogueService : MonoBehaviour
                         break;
                 }
 
+            } // any action recognised?
+
+            if (response.Result.Output.Generic != null && response.Result.Output.Generic.Capacity > 0)
+            {
+
+                dSpeechOutputMgr.Speak(response.Result.Output.Generic[0].Text); // + ", " + username
+
+            } else // no Generic response coming back, so say something diplomatic
+            {
+                dSpeechOutputMgr.Speak("OK.");
             }
-			
-			
-
-			dSpeechOutputMgr.Speak(response.Result.Output.Generic[0].Text ); // + ", " + username
-
+            
             // now all data has been extracted, so we can run through the list of exclusions
             UpdateExercises();
 
-            if ( (dialogueNodeTitle == "S3.1.2-Where Pain") || dialogueNodeTitle == "S3.1.2-Where Pain") // replace with name of the last question
-            {
-                Debug.Log("Asked all questions, nothing else can be asked!");
-            }
+            } // Watson did understand the user
 
-        } else {
-			dSpeechOutputMgr.Speak("I don't understand, can you rephrase?");
-		}
+        } // end of method OnResponseReceived
 
         //dSpeechInputMgr.Active = false;
 
@@ -291,7 +289,6 @@ public class DialogueService : MonoBehaviour
         //{
         //    Log.Debug("Extract outputText", "Failed to extract outputText and set for speaking");
         //}
-    }
 
     public void UpdateExercises()
     {
