@@ -86,8 +86,8 @@ public class DaimonManager : MonoBehaviour
 	public void Animate( string exercise ) {
 		
 		switch (exercise) {
-			case "B12":
-				myAnimator.Play("BreathingIdle");
+			case "Standing Idle":
+				myAnimator.Play("Standing Idle");
 				break;
             case "waving":
                 myAnimator.Play("waving");

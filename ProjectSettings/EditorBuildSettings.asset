@@ -5,10 +5,11 @@ EditorBuildSettings:
   m_ObjectHideFlags: 0
   serializedVersion: 2
   m_Scenes:
-  - enabled: 0
-    path: Assets/Scenes/Conversation.unity
-    guid: 97e6cef5ff88c2041b8857122c83d757
   - enabled: 1
-    path: Assets/Scenes/MainWatsonScene.unity
-    guid: 09d58325ea0233249b41e7fe42deaa1e
-  m_configObjects: {}
+    path: Assets/Scenes/Hanna.unity
+    guid: 30e26e36b5a6f784caa73ca7ed3983fd
+  m_configObjects:
+    com.unity.xr.arcore.PlayerSettings: {fileID: 11400000, guid: 1ac981cd3d7cd7e488a0acd76c2f1f3a,
+      type: 2}
+    com.unity.xr.management.loader_settings: {fileID: 11400000, guid: 596d0e7e79216f244ac9b589df665bc5,
+      type: 2}
