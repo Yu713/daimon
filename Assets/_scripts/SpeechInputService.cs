@@ -1,4 +1,4 @@
-﻿/**
+/**
 * Modified by Fridolin/Xinyu
 * 
 * Copyright 2015 IBM Corp. All Rights Reserved.
@@ -30,27 +30,43 @@ using IBM.Cloud.SDK.DataTypes;
 using IBM.Cloud.SDK.Connection;
 using IBM.Cloud.SDK.Logging;
 using System;
+using FrostweepGames.Plugins.Native;
 
 public class SpeechInputService : MonoBehaviour
 {
     [Space(10)]
 
+<<<<<<< HEAD
     [Tooltip("The service URL (optional). This defaults to \"https://stream.watsonplatform.net/speech-to-text/api\"")]
     public string serviceUrl = "URL";
+=======
+    //[Tooltip("The service URL (optional). This defaults to \"https://stream.watsonplatform.net/speech-to-text/api\"")]
+    //public string serviceUrl = "https://gateway-lon.watsonplatform.net/speech-to-text/api";
+>>>>>>> d9aff3e04965d65af0995befd82710fdd817f076
 
     [Tooltip("Text field to display the results of streaming.")]
     public Text ResultsField;
 
+<<<<<<< HEAD
     [Header("IAM Authentication")]
     [Tooltip("The IAM apikey.")]
     public string iamApikey = "API key";
+=======
+    //[Header("IAM Authentication")]
+    //[Tooltip("The IAM apikey.")]
+    //public string iamApikey = "";
+>>>>>>> d9aff3e04965d65af0995befd82710fdd817f076
 
     [Header("Parameters")]
     // https://www.ibm.com/watson/developercloud/speech-to-text/api/v1/curl.html?curl#get-model
     [Tooltip("The Model to use. This defaults to en-US_BroadbandModel")]
     public string _recognizeModel;
 
+<<<<<<< HEAD
 
+=======
+    private LangTransService myTranslator;
+>>>>>>> d9aff3e04965d65af0995befd82710fdd817f076
     private SpeechOutputService myTTS;
     private DialogueService myDS;
 
@@ -71,8 +87,6 @@ public class SpeechInputService : MonoBehaviour
 
     //string _testString = "<speak version=\"1.0\"><express-as type=\"Hi\">Hi How are you today!</express-as></speak>";
 
-   
-
     void Start()
     {
         LogSystem.InstallDefaultReactors();
@@ -85,6 +99,8 @@ public class SpeechInputService : MonoBehaviour
 
     private IEnumerator CreateService()
     {
+		/*
+		 
         if (string.IsNullOrEmpty(iamApikey))
         {
             throw new IBMException("Please provide IAM ApiKey for the service.");
@@ -106,6 +122,13 @@ public class SpeechInputService : MonoBehaviour
             yield return null;
 
         _service = new SpeechToTextService(credentials);
+		 
+		 */
+		
+		_service = new SpeechToTextService();
+		
+		while (!_service.Credentials.HasIamTokenData()) yield return null;
+		
         _service.StreamMultipart = true;
 
         Active = true;
@@ -155,7 +178,7 @@ public class SpeechInputService : MonoBehaviour
     {
         if (_recordingRoutine != 0)
         {
-            Microphone.End(_microphoneID);
+            CustomMicrophone.End(_microphoneID);
             Runnable.Stop(_recordingRoutine);
             _recordingRoutine = 0;
         }
@@ -171,7 +194,7 @@ public class SpeechInputService : MonoBehaviour
     private IEnumerator RecordingHandler()
     {
         //Log.Debug("STT.RecordingHandler()", "devices: {0}", Microphone.devices);
-        _recording = Microphone.Start(_microphoneID, true, _recordingBufferSize, _recordingHZ);
+        _recording = CustomMicrophone.Start(_microphoneID, true, _recordingBufferSize, _recordingHZ);
         yield return null;      // let _recordingRoutine get set..
 
         if (_recording == null)
@@ -186,8 +209,8 @@ public class SpeechInputService : MonoBehaviour
 
         while (_recordingRoutine != 0 && _recording != null)
         {
-            int writePos = Microphone.GetPosition(_microphoneID);
-            if (writePos > _recording.samples || !Microphone.IsRecording(_microphoneID))
+            int writePos = CustomMicrophone.GetPosition(_microphoneID);
+            if (writePos > _recording.samples || !CustomMicrophone.IsRecording(_microphoneID))
             {
                 Log.Error("STT.RecordingHandler()", "Microphone disconnected.");
 

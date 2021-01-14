@@ -1,4 +1,4 @@
-﻿using System.Collections;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
@@ -13,6 +13,7 @@ using IBM.Cloud.SDK.Logging;
 using System;
 using IBM.Watson.Assistant.V2.Model;
 using FullSerializer;
+using System.Linq;
 
 public class DialogueService : MonoBehaviour
 {
@@ -20,26 +21,43 @@ public class DialogueService : MonoBehaviour
     public Text ResponseTextField; // inspector slot for drag & drop of the Canvas > Text gameobject
     private SpeechOutputService dSpeechOutputMgr;
     private SpeechInputService dSpeechInputMgr;
+	private UserProfile dUser;
+	private ExerciseController dEC;
 
     private fsSerializer _serializer = new fsSerializer();
 
     [Space(10)]
+<<<<<<< HEAD
     [Tooltip("The IAM apikey.")]
     [SerializeField]
     private string iamApikey = "API key";
     [Tooltip("The service URL (optional). This defaults to \"https://api.eu-gb.assistant.watson.cloud.ibm.com\"")]
     [SerializeField]
     private string serviceUrl = "URL";
+=======
+    //[Tooltip("The IAM apikey.")]
+    //[SerializeField]
+    //private string iamApikey = "";
+    //[Tooltip("The service URL (optional). This defaults to \"https://gateway.watsonplatform.net/assistant/api\"")]
+    //[SerializeField]
+    //private string serviceUrl = "https://gateway-lon.watsonplatform.net/assistant/api";
+	
+>>>>>>> d9aff3e04965d65af0995befd82710fdd817f076
     [Tooltip("The version date with which you would like to use the service in the form YYYY-MM-DD.")]
     [SerializeField]
     private string versionDate = "Date";
     [Tooltip("The assistantId to run the example.")]
     [SerializeField]
+<<<<<<< HEAD
     private string assistantId = "Assistant ID";
 
     public Animator anim;
+=======
+	private string assistantId = "fd4e26f9-5677-4136-910c-bd4cc6891e8d"; //9437d854-b239-4054-b78b-c7b446731498";
+>>>>>>> d9aff3e04965d65af0995befd82710fdd817f076
 
     private AssistantService service;
+	private DaimonManager dAImgr;
 
     private string username;
 
@@ -52,6 +70,9 @@ public class DialogueService : MonoBehaviour
         LogSystem.InstallDefaultReactors();
 
         dSpeechOutputMgr = GetComponent<SpeechOutputService>();
+		dAImgr = GetComponent<DaimonManager>();
+		dUser = GetComponent<UserProfile>();
+		dEC = GetComponent<ExerciseController>();
 
         dSpeechInputMgr = GetComponent<SpeechInputService>();
         dSpeechInputMgr.onInputReceived += OnInputReceived;
@@ -62,9 +83,10 @@ public class DialogueService : MonoBehaviour
 
     private IEnumerator CreateService()
     {
+		/*
         if (string.IsNullOrEmpty(iamApikey))
         {
-            throw new IBMException("Plesae provide IAM ApiKey for the service.");
+            throw new IBMException("Please provide IAM ApiKey for the service.");
         }
 
         //  Create credential and instantiate service
@@ -81,9 +103,13 @@ public class DialogueService : MonoBehaviour
         //  Wait for tokendata
         while (!credentials.HasIamTokenData())
             yield return null;
+		*/
 
-        service = new AssistantService(versionDate, credentials);
+        service = new AssistantService(versionDate); //, credentials);
 
+		while (!service.Credentials.HasIamTokenData())
+		yield return null;
+		
         Runnable.Run(CreateSession());
 
         //Runnable.Run(Examples());
@@ -91,7 +117,7 @@ public class DialogueService : MonoBehaviour
 
     private IEnumerator CreateSession()
     {
-        //Log.Debug("ExampleAssistantV2.RunTest()", "Attempting to CreateSession");
+		Debug.Log("CONNECTING TO ASSISTANT: " + assistantId);
         service.CreateSession(OnCreateSession, assistantId);
 
         while (!createSessionTested)
@@ -140,21 +166,48 @@ public class DialogueService : MonoBehaviour
     private void OnResponseReceived(DetailedResponse<MessageResponse> response, IBMError error)
     {
 
-        Debug.Log("DialogueService response: " + response.Result.Output.Generic[0].Text);
+		if (response.Result.Output.Generic.Count > 0) {
+			Debug.Log("DialogueService response: " + response.Result.Output.Generic[0].Text);
+			if (response.Result.Output.Intents.Capacity > 0) Debug.Log("    -> " + response.Result.Output.Intents[0].Intent.ToString());
+		}
+		
+		if ( response.Result.Output.Intents.Capacity > 0 ) {
+		
+			string intent = response.Result.Output.Intents[0].Intent.ToString();
+			string actionName = response.Result.Output.Actions[0].Name;
+			
+			// check whether it is really the intent we want to check
+			// (or do we want to know the name of the dialogue step?)
+			switch (actionName) {
+				case "MakeDance":
+					MakeDance();
+					break;
+				case "name":
+					username = response.Result.Output.Entities.Find( (x) => x.Entity.ToString()=="sys-person").Value.ToString();
+					Debug.Log("username = " + username);
+					break;
+				case "age":
+					dUser.age = response.Result.Output.Entities.Find( (x) => x.Entity.ToString()=="sys-number").Value;
+					Debug.Log("age = " + dUser.age);
+					if (dUser.age>65) {
+						dEC.Remove("B11");
+					}
+					break;
+				case "INsert the name of the dialogue step that is the last step in the dialogue here":
+					// call animator in the daimon manager
+					// play animation:
+					dAImgr.Animate( dEC.Exercises.first );
+					break;
+				default:
+					break;
+			}
 
-        Debug.Log("    -> " + response.Result.Output.Intents[0].Intent.ToString());
-        string intent = response.Result.Output.Intents[0].Intent.ToString();
-        if (intent == "MakeDance")
-        {
-            MakeDance(); 
-        } else if (intent == "name")
-        {
-            // Debug.Log("    NAME === " + response.Result.Output.Entities[0].Entity.ToString() );
-            username = response.Result.Output.Entities.Find( (x) => x.Entity.ToString()=="sys-person").Value.ToString();
-            Debug.Log("username = " + username);
-        }
+			dSpeechOutputMgr.Speak(response.Result.Output.Generic[0].Text + ", " + username);
+			
+		} else {
+			dSpeechOutputMgr.Speak("I don't understand, can you rephrase?");
+		}
 
-        dSpeechOutputMgr.Speak(response.Result.Output.Generic[0].Text + ", " + username);
         //dSpeechInputMgr.Active = false;
 
         //myTTS.myVoice = "de-DE_DieterV3Voice";
