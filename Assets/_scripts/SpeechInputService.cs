@@ -36,14 +36,14 @@ public class SpeechInputService : MonoBehaviour
     [Space(10)]
 
     [Tooltip("The service URL (optional). This defaults to \"https://stream.watsonplatform.net/speech-to-text/api\"")]
-    public string serviceUrl = "https://gateway-lon.watsonplatform.net/speech-to-text/api";
+    public string serviceUrl = "URL";
 
     [Tooltip("Text field to display the results of streaming.")]
     public Text ResultsField;
 
     [Header("IAM Authentication")]
     [Tooltip("The IAM apikey.")]
-    public string iamApikey = "zngKvVILMGV_58ZIMDxnCuYnyKM4PUzsLCRSlYTRoCHJ";
+    public string iamApikey = "API key";
 
     [Header("Parameters")]
     // https://www.ibm.com/watson/developercloud/speech-to-text/api/v1/curl.html?curl#get-model
@@ -51,7 +51,6 @@ public class SpeechInputService : MonoBehaviour
     public string _recognizeModel;
 
 
-    private LangTransService myTranslator;
     private SpeechOutputService myTTS;
     private DialogueService myDS;
 
@@ -79,7 +78,6 @@ public class SpeechInputService : MonoBehaviour
         LogSystem.InstallDefaultReactors();
         Runnable.Run(CreateService());
 
-        myTranslator = GetComponent<LangTransService>();
         myDS = GetComponent<DialogueService>();
         //audioSrc = GetComponent<AudioSource>();
 

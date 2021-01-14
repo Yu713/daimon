@@ -8,8 +8,6 @@ using FullSerializer;
 public class DaimonManager : MonoBehaviour
 {
 
-    private LangTransService dTranslationMgr;
-    private DialogueService dDialogMgr;
     public SpeechInputService mySpeechInputMgr;
     private SpeechOutputService mySpeechOutputMgr;
 
@@ -32,8 +30,7 @@ public class DaimonManager : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        dTranslationMgr = GetComponent<LangTransService>();
-        dDialogMgr = GetComponent<DialogueService>();
+
         mySpeechInputMgr = GetComponent<SpeechInputService>();
         mySpeechOutputMgr = GetComponent<SpeechOutputService>();
     }

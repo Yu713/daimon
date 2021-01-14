@@ -20,9 +20,9 @@ public class SpeechOutputService : MonoBehaviour
 
     private TextToSpeechService myService;
 
-    public string versionDate = "2018-12-19";
-    public string apiKey = "hQ37RvPZw2T6ppxja9t5Z3oH0azs49nPCtZPbJuYSrhr"; 
-    public string serviceUrl = "https://gateway-lon.watsonplatform.net/text-to-speech/api"; 
+    public string versionDate = "Date";
+    public string apiKey = "API key"; 
+    public string serviceUrl = "URL"; 
 
     public string myVoice = "en-US_MichaelVoice";
 

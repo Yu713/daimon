@@ -26,16 +26,16 @@ public class DialogueService : MonoBehaviour
     [Space(10)]
     [Tooltip("The IAM apikey.")]
     [SerializeField]
-    private string iamApikey = "X4udGLROceeDWMxy8aZ85p_AJLghkkwPtzYwF5IN5NVS";
-    [Tooltip("The service URL (optional). This defaults to \"https://gateway.watsonplatform.net/assistant/api\"")]
+    private string iamApikey = "API key";
+    [Tooltip("The service URL (optional). This defaults to \"https://api.eu-gb.assistant.watson.cloud.ibm.com\"")]
     [SerializeField]
-    private string serviceUrl = "https://gateway-lon.watsonplatform.net/assistant/api";
+    private string serviceUrl = "URL";
     [Tooltip("The version date with which you would like to use the service in the form YYYY-MM-DD.")]
     [SerializeField]
-    private string versionDate = "2019-02-28";
+    private string versionDate = "Date";
     [Tooltip("The assistantId to run the example.")]
     [SerializeField]
-    private string assistantId = "9437d854-b239-4054-b78b-c7b446731498";
+    private string assistantId = "Assistant ID";
 
     public Animator anim;
 
